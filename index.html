@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Gia Khoa & Thu Huyền | 04.04.2026</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css">
+
+  <!--
+  ╔══════════════════════════════════════════════════════════╗
+  ║  📸  HƯỚNG DẪN THÊM ẢNH                                ║
+  ╠══════════════════════════════════════════════════════════╣
+  ║                                                          ║
+  ║  1. Đặt ảnh vào đúng folder:                            ║
+  ║     images/hero/     → ảnh nền trang chủ               ║
+  ║     images/gallery/  → ảnh album                        ║
+  ║     images/assets/   → logo, icon, QR code              ║
+  ║                                                          ║
+  ║  2. Ảnh HERO:                                           ║
+  ║     Tìm comment "HERO BACKGROUND IMAGE" bên dưới        ║
+  ║     Thay đường dẫn vào style của .hero-bg               ║
+  ║                                                          ║
+  ║  3. Ảnh GALLERY:                                        ║
+  ║     Mở js/main.js → tìm "galleryData"                   ║
+  ║     Thay null bằng đường dẫn ảnh:                       ║
+  ║     src: 'images/gallery/photo-01.jpg'                   ║
+  ║                                                          ║
+  ╚══════════════════════════════════════════════════════════╝
+  -->
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="preloader-heart"></div>
+  <p class="preloader-text">Gia Khoa & Thu Huyền</p>
+</div>
+
+<!-- MUSIC TOGGLE -->
+<div class="music-toggle paused" id="music-toggle" onclick="toggleMusic()" title="Bật/tắt nhạc">
+  <div class="music-bars">
+    <div class="music-bar"></div>
+    <div class="music-bar"></div>
+    <div class="music-bar"></div>
+    <div class="music-bar"></div>
+  </div>
+</div>
+<!-- TODO: thêm audio khi có file nhạc -->
+<!-- <audio id="bg-music" src="images/assets/music.mp3" loop></audio> -->
+
+<!-- SCROLL NAV -->
+<nav class="scroll-nav" id="scroll-nav">
+  <div class="scroll-dot" data-target="hero"             data-label="Trang chủ"></div>
+  <div class="scroll-dot" data-target="countdown-section" data-label="Đếm ngược"></div>
+  <div class="scroll-dot" data-target="family"           data-label="Gia đình"></div>
+  <div class="scroll-dot" data-target="gallery"          data-label="Album"></div>
+  <div class="scroll-dot" data-target="events"           data-label="Sự kiện"></div>
+  <div class="scroll-dot" data-target="rsvp"             data-label="Xác nhận"></div>
+  <div class="scroll-dot" data-target="gift"             data-label="Chúc phúc"></div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════
+     ENVELOPE SCREEN
+     ════════════════════════════════════════════════════════ -->
+<div id="envelope-screen">
+  <canvas class="particles-canvas" id="envelope-particles"></canvas>
+  <div class="envelope-wrapper">
+    <div class="envelope-body" id="envelope" onclick="openEnvelope()">
+      <div class="envelope-border-inner"></div>
+      <div class="envelope-trim-top"></div>
+      <div class="envelope-trim-bottom"></div>
+      <div class="envelope-flap" id="envelope-flap"></div>
+      <div class="wax-seal"><div class="wax-seal-inner">H&K</div></div>
+      <div class="envelope-thiep" id="envelope-thiep">Thiệp Mời</div>
+      <div class="envelope-cta"   id="envelope-cta">nhấn để mở phong bì</div>
+    </div>
+
+    <div class="invite-card-wrap" id="invite-card">
+      <div class="invite-card">
+        <div class="shimmer-layer"></div>
+        <div class="invite-card-top"></div>
+        <div class="invite-card-body">
+          <p class="invite-label">Save the Date</p>
+          <p class="invite-sub">Thiệp Mời Đám Cưới</p>
+          <div class="invite-names">Gia Khoa</div>
+          <div class="invite-amp">&</div>
+          <div class="invite-names">Thu Huyền</div>
+          <div class="invite-date-box">
+            <p class="invite-date">04 · 04 · 2026</p>
+          </div>
+
+          <!-- ── 2 NÚT CHỌN ── -->
+          <div class="invite-choose-btns">
+            <button class="invite-choose-btn groom-btn" onclick="enterSite('groom')">
+              <span class="icb-icon">
+                <!-- icon áo vest chú rể -->
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="20" cy="10" r="6" fill="currentColor" opacity=".18"/>
+                  <path d="M20 16 L14 22 L10 38 L30 38 L26 22 Z" fill="currentColor" opacity=".22"/>
+                  <path d="M20 16 L14 22 L16 26 L20 22 L24 26 L26 22 Z" fill="currentColor" opacity=".5"/>
+                  <path d="M20 22 L19 26 L20 28 L21 26 Z" fill="currentColor"/>
+                  <circle cx="20" cy="10" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                  <path d="M20 16 L14 22 L10 38 L30 38 L26 22 Z" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linejoin="round"/>
+                  <path d="M14 22 L16 26 L20 22 L24 26 L26 22" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="icb-label">Nhà Trai</span>
+              <span class="icb-name">Gia Khoa</span>
+            </button>
+            <button class="invite-choose-btn bride-btn" onclick="enterSite('bride')">
+              <span class="icb-icon">
+                <!-- icon váy cô dâu -->
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="20" cy="9" r="5.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                  <path d="M15 16 Q12 20 10 26 Q8 32 10 38 L30 38 Q32 32 30 26 Q28 20 25 16" stroke="currentColor" stroke-width="1.3" fill="currentColor" fill-opacity=".15" stroke-linejoin="round"/>
+                  <path d="M15 16 Q20 20 25 16" stroke="currentColor" stroke-width="1.3" fill="none"/>
+                  <path d="M10 30 Q15 27 20 30 Q25 33 30 30" stroke="currentColor" stroke-width="1" fill="none" stroke-dasharray="2 1.5"/>
+                  <!-- vương miện -->
+                  <path d="M15 7 L16.5 4 L18.5 6.5 L20 3 L21.5 6.5 L23.5 4 L25 7" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="icb-label">Nhà Gái</span>
+              <span class="icb-name">Thu Huyền</span>
+            </button>
+          </div>
+        </div>
+        <div class="invite-card-top"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     MAIN CONTENT
+     ════════════════════════════════════════════════════════ -->
+<div id="main-content">
+
+  <!-- ── HERO — ảnh full width, không text đè ── -->
+  <section class="hero" id="hero">
+    <div class="hero-bg has-photo" id="hero-bg-el"></div>
+    <div class="hero-overlay"></div>
+    <canvas class="particles-canvas" id="hero-particles"
+      style="position:absolute;inset:0;pointer-events:none"></canvas>
+    <!-- Badge hiển thị đang xem bên nào -->
+    <div id="side-badge" style="display:none;position:absolute;top:16px;left:16px;z-index:20;
+      background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+      padding:6px 14px;border-radius:20px;font-family:var(--font-ui);font-size:13px;
+      font-weight:600;color:var(--crimson);border:1px solid rgba(197,165,90,.3);
+      box-shadow:0 2px 12px rgba(0,0,0,.1);align-items:center;gap:6px;cursor:pointer"
+      onclick="goBackToChoice()" title="Quay lại chọn bên">
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="mouse"><div class="wheel"></div></div>
+    </div>
+  </section>
+
+  <!-- ── HERO INTRO — tên cô dâu chú rể ── -->
+  <section class="hero-intro" id="hero-intro">
+
+    <!-- Hoa góc trên trái -->
+    <svg class="floral-tl" viewBox="0 0 240 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#8B1A1A" fill="#8B1A1A">
+        <!-- Cành chính uốn cong -->
+        <path d="M8 255 C20 220 45 190 70 160 C95 130 125 100 155 65 C170 47 185 30 200 15" stroke="#8B1A1A" stroke-width="1.8" fill="none" opacity="0.7"/>
+        <!-- Cành phụ trái -->
+        <path d="M45 200 C30 185 15 175 5 165" stroke="#8B1A1A" stroke-width="1.2" fill="none" opacity="0.5"/>
+        <path d="M75 165 C58 158 42 155 28 148" stroke="#8B1A1A" stroke-width="1.1" fill="none" opacity="0.45"/>
+        <path d="M110 125 C98 112 90 100 82 88" stroke="#8B1A1A" stroke-width="1.1" fill="none" opacity="0.45"/>
+
+        <!-- BÔNG HOA LỚN góc trên phải — 5 cánh tròn kiểu ảnh mẫu -->
+        <circle cx="198" cy="17" r="4" opacity="0.85"/>
+        <!-- Cánh hoa 5 cánh, mỗi cánh là ellipse xoay -->
+        <ellipse cx="198" cy="6"  rx="5.5" ry="9" opacity="0.75" transform="rotate(0   198 17)"/>
+        <ellipse cx="198" cy="6"  rx="5.5" ry="9" opacity="0.75" transform="rotate(72  198 17)"/>
+        <ellipse cx="198" cy="6"  rx="5.5" ry="9" opacity="0.75" transform="rotate(144 198 17)"/>
+        <ellipse cx="198" cy="6"  rx="5.5" ry="9" opacity="0.75" transform="rotate(216 198 17)"/>
+        <ellipse cx="198" cy="6"  rx="5.5" ry="9" opacity="0.75" transform="rotate(288 198 17)"/>
+        <!-- Nhụy hoa -->
+        <circle cx="198" cy="17" r="5.5" fill="none" stroke="#8B1A1A" stroke-width="1" opacity="0.6"/>
+
+        <!-- NỤ HOA 1 — giữa cành -->
+        <path d="M153 67 C148 58 145 50 147 43 C149 36 155 34 158 38 C161 42 160 52 155 60 Z" opacity="0.7"/>
+        <path d="M158 38 C163 32 168 31 170 35 C172 39 169 48 163 55 C159 59 155 62 153 67 Z" opacity="0.6"/>
+        <!-- Đài hoa -->
+        <path d="M150 68 C152 72 155 74 158 72 C161 70 163 66 162 62" stroke="#8B1A1A" stroke-width="1" fill="none" opacity="0.5"/>
+
+        <!-- NỤ HOA 2 nhỏ hơn -->
+        <path d="M118 103 C114 96 113 89 115 84 C117 79 121 78 123 81 C125 85 124 93 120 100 Z" opacity="0.65"/>
+        <path d="M123 81 C127 76 131 76 132 80 C133 84 130 91 126 97 C123 101 120 103 118 103 Z" opacity="0.55"/>
+        <path d="M116 104 C118 108 120 109 122 108 C124 107 125 104 124 101" stroke="#8B1A1A" stroke-width="0.9" fill="none" opacity="0.45"/>
+
+        <!-- LÁ LỚN cạnh cành - kiểu lá nhọn dài -->
+        <path d="M68 163 C55 155 44 140 48 125 C52 110 66 108 74 118 C82 128 80 148 68 163 Z" opacity="0.55"/>
+        <path d="M48 125 L74 118" stroke="#8B1A1A" stroke-width="0.7" opacity="0.35"/>
+
+        <path d="M96 132 C88 120 86 105 91 93 C96 81 108 80 113 90 C118 100 113 118 100 130 Z" opacity="0.5"/>
+        <path d="M91 93 L113 90" stroke="#8B1A1A" stroke-width="0.7" opacity="0.3"/>
+
+        <path d="M42 202 C28 198 16 186 18 174 C20 162 32 160 40 167 C48 174 49 190 42 202 Z" opacity="0.5"/>
+
+        <!-- BÔNG HOA NHỎ giữa cành -->
+        <circle cx="88" cy="145" r="3" opacity="0.8"/>
+        <ellipse cx="88" cy="137" rx="3.5" ry="6" opacity="0.65" transform="rotate(0   88 145)"/>
+        <ellipse cx="88" cy="137" rx="3.5" ry="6" opacity="0.65" transform="rotate(72  88 145)"/>
+        <ellipse cx="88" cy="137" rx="3.5" ry="6" opacity="0.65" transform="rotate(144 88 145)"/>
+        <ellipse cx="88" cy="137" rx="3.5" ry="6" opacity="0.65" transform="rotate(216 88 145)"/>
+        <ellipse cx="88" cy="137" rx="3.5" ry="6" opacity="0.65" transform="rotate(288 88 145)"/>
+
+        <!-- LÁ GÓC DƯỚI to — kiểu lá phoenix truyền thống -->
+        <path d="M8 255 C12 240 18 228 28 220 C38 212 50 212 52 222 C54 232 44 245 28 252 Z" opacity="0.5"/>
+        <path d="M28 220 C35 208 45 204 50 210" stroke="#8B1A1A" stroke-width="0.8" fill="none" opacity="0.35"/>
+        <path d="M18 252 C22 242 32 236 40 240" stroke="#8B1A1A" stroke-width="0.8" fill="none" opacity="0.3"/>
+
+        <!-- Chi tiết nhụy nhỏ -->
+        <circle cx="198" cy="17" r="2" opacity="1"/>
+        <circle cx="88"  cy="145" r="1.5" opacity="1"/>
+      </g>
+    </svg>
+
+    <!-- Hoa góc trên phải -->
+    <svg class="floral-tr" viewBox="0 0 240 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#8B1A1A" fill="#8B1A1A">
+        <!-- Cành chính — mirror của TL -->
+        <path d="M232 255 C220 220 195 190 170 160 C145 130 115 100 85 65 C70 47 55 30 40 15" stroke="#8B1A1A" stroke-width="1.8" fill="none" opacity="0.7"/>
+        <path d="M195 200 C210 185 225 175 235 165" stroke="#8B1A1A" stroke-width="1.2" fill="none" opacity="0.5"/>
+        <path d="M165 165 C182 158 198 155 212 148" stroke="#8B1A1A" stroke-width="1.1" fill="none" opacity="0.45"/>
+
+        <!-- BÔNG HOA LỚN góc trên trái -->
+        <circle cx="42" cy="17" r="4" opacity="0.85"/>
+        <ellipse cx="42" cy="6"  rx="5.5" ry="9" opacity="0.75" transform="rotate(0   42 17)"/>
+        <ellipse cx="42" cy="6"  rx="5.5" ry="9" opacity="0.75" transform="rotate(72  42 17)"/>
+        <ellipse cx="42" cy="6"  rx="5.5" ry="9" opacity="0.75" transform="rotate(144 42 17)"/>
+        <ellipse cx="42" cy="6"  rx="5.5" ry="9" opacity="0.75" transform="rotate(216 42 17)"/>
+        <ellipse cx="42" cy="6"  rx="5.5" ry="9" opacity="0.75" transform="rotate(288 42 17)"/>
+        <circle cx="42" cy="17" r="5.5" fill="none" stroke="#8B1A1A" stroke-width="1" opacity="0.6"/>
+
+        <!-- Nụ hoa -->
+        <path d="M87 67 C92 58 95 50 93 43 C91 36 85 34 82 38 C79 42 80 52 85 60 Z" opacity="0.7"/>
+        <path d="M82 38 C77 32 72 31 70 35 C68 39 71 48 77 55 C81 59 85 62 87 67 Z" opacity="0.6"/>
+        <path d="M90 68 C88 72 85 74 82 72 C79 70 77 66 78 62" stroke="#8B1A1A" stroke-width="1" fill="none" opacity="0.5"/>
+
+        <path d="M122 103 C126 96 127 89 125 84 C123 79 119 78 117 81 C115 85 116 93 120 100 Z" opacity="0.65"/>
+        <path d="M117 81 C113 76 109 76 108 80 C107 84 110 91 114 97 C117 101 120 103 122 103 Z" opacity="0.55"/>
+
+        <!-- Lá -->
+        <path d="M172 163 C185 155 196 140 192 125 C188 110 174 108 166 118 C158 128 160 148 172 163 Z" opacity="0.55"/>
+        <path d="M144 132 C152 120 154 105 149 93 C144 81 132 80 127 90 C122 100 127 118 140 130 Z" opacity="0.5"/>
+        <path d="M198 202 C212 198 224 186 222 174 C220 162 208 160 200 167 C192 174 191 190 198 202 Z" opacity="0.5"/>
+
+        <!-- Bông hoa nhỏ giữa -->
+        <circle cx="152" cy="145" r="3" opacity="0.8"/>
+        <ellipse cx="152" cy="137" rx="3.5" ry="6" opacity="0.65" transform="rotate(0   152 145)"/>
+        <ellipse cx="152" cy="137" rx="3.5" ry="6" opacity="0.65" transform="rotate(72  152 145)"/>
+        <ellipse cx="152" cy="137" rx="3.5" ry="6" opacity="0.65" transform="rotate(144 152 145)"/>
+        <ellipse cx="152" cy="137" rx="3.5" ry="6" opacity="0.65" transform="rotate(216 152 145)"/>
+        <ellipse cx="152" cy="137" rx="3.5" ry="6" opacity="0.65" transform="rotate(288 152 145)"/>
+
+        <!-- Lá góc dưới -->
+        <path d="M232 255 C228 240 222 228 212 220 C202 212 190 212 188 222 C186 232 196 245 212 252 Z" opacity="0.5"/>
+        <circle cx="42"  cy="17"  r="2" opacity="1"/>
+        <circle cx="152" cy="145" r="1.5" opacity="1"/>
+      </g>
+    </svg>
+
+    
+
+    
+
+    <div class="hero-intro-ornament">
+      <div class="line"></div>
+      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <div class="line"></div>
+    </div>
+    <div class="hero-greeting" id="hero-greeting" style="color:rgba(255,255,255,.8);margin-bottom:16px;font-family:var(--font-ui);font-size:15px;display:none">
+      Trân trọng kính mời <span class="hl" id="guest-display" style="color:var(--gold-light);font-weight:600"></span> đến dự lễ cưới
+    </div>
+    <div class="hero-intro-names">
+      <h1 id="data-hero-name1">Gia Khoa</h1>
+      <div class="hero-intro-amp">
+        <div class="line"></div><span>&</span><div class="line"></div>
+      </div>
+      <h1 id="data-hero-name2">Thu Huyền</h1>
+    </div>
+    <p class="hero-intro-date" id="data-hero-date">Chủ Nhật · 04 Tháng 04 Năm 2026 · Hải Phòng</p>
+    <button class="hero-intro-cta"
+      onclick="document.getElementById('family').scrollIntoView({behavior:'smooth'})">
+      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      Xem chi tiết lễ cưới
+    </button>
+  </section>
+
+
+  <!-- ── COUNTDOWN ── -->
+  <section id="countdown-section">
+    <h2 class="countdown-label">Đếm Ngược Ngày Trọng Đại</h2>
+    <p class="countdown-sub">04 · 04 · 2026 — Hải Phòng</p>
+    <div class="countdown-grid">
+      <div class="countdown-unit">
+        <span class="countdown-num" id="cd-days">00</span>
+        <span class="countdown-txt">Ngày</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-num" id="cd-hours">00</span>
+        <span class="countdown-txt">Giờ</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-num" id="cd-mins">00</span>
+        <span class="countdown-txt">Phút</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-num" id="cd-secs">00</span>
+        <span class="countdown-txt">Giây</span>
+      </div>
+    </div>
+    <div class="countdown-date-strip">
+      <div class="cds-item">
+        <span class="cds-label">Thứ Bảy</span>
+        <span class="cds-val">03/04/2026</span>
+        <span class="cds-note">Lễ Thành Hôn · 08:00</span>
+      </div>
+      <div class="cds-divider">❤</div>
+      <div class="cds-item">
+        <span class="cds-label">Chủ Nhật</span>
+        <span class="cds-val">04/04/2026</span>
+        <span class="cds-note">Tiệc Cưới · 11:00</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAMILY ── -->
+  <section class="section paper-texture" id="family">
+      <svg class="sec-floral sec-floral-tl" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:-5px;left:-5px;width:180px;pointer-events:none;opacity:0.12">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 215 C18 185 40 158 65 130 C90 102 118 76 148 48 C162 34 175 20 188 8" stroke="#8B1A1A" stroke-width="1.6" fill="none"/>
+          <!-- Bông hoa lớn -->
+          <circle cx="186" cy="10" r="3.5"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(0   186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(72  186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(144 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(216 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(288 186 10)"/>
+          <circle cx="186" cy="10" r="5" fill="none" stroke="#8B1A1A" stroke-width="0.8"/>
+          <!-- Nụ nhỏ -->
+          <path d="M143 50 C139 43 138 36 140 31 C142 26 146 25 148 28 C150 32 149 39 145 46 Z"/>
+          <path d="M148 28 C152 23 156 23 157 27 C158 31 155 38 151 44 C148 48 145 50 143 50 Z" opacity="0.8"/>
+          <!-- Lá -->
+          <path d="M62 133 C50 125 40 112 44 99 C48 86 60 85 67 94 C74 103 72 120 62 133 Z" opacity="0.85"/>
+          <path d="M92 103 C84 92 83 78 88 68 C93 58 104 57 108 66 C112 75 108 92 96 102 Z" opacity="0.8"/>
+          <!-- Lá dưới lớn -->
+          <path d="M5 215 C10 200 18 190 28 184 C38 178 48 180 49 188 C50 196 42 207 28 214 Z" opacity="0.8"/>
+          <circle cx="186" cy="10" r="1.8" opacity="1"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-tr" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:-5px;right:-5px;width:180px;pointer-events:none;opacity:0.12;transform:scaleX(-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 215 C18 185 40 158 65 130 C90 102 118 76 148 48 C162 34 175 20 188 8" stroke="#8B1A1A" stroke-width="1.6" fill="none"/>
+          <circle cx="186" cy="10" r="3.5"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(0   186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(72  186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(144 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(216 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(288 186 10)"/>
+          <circle cx="186" cy="10" r="5" fill="none" stroke="#8B1A1A" stroke-width="0.8"/>
+          <path d="M143 50 C139 43 138 36 140 31 C142 26 146 25 148 28 C150 32 149 39 145 46 Z"/>
+          <path d="M148 28 C152 23 156 23 157 27 C158 31 155 38 151 44 C148 48 145 50 143 50 Z" opacity="0.8"/>
+          <path d="M62 133 C50 125 40 112 44 99 C48 86 60 85 67 94 C74 103 72 120 62 133 Z" opacity="0.85"/>
+          <path d="M92 103 C84 92 83 78 88 68 C93 58 104 57 108 66 C112 75 108 92 96 102 Z" opacity="0.8"/>
+          <path d="M5 215 C10 200 18 190 28 184 C38 178 48 180 49 188 C50 196 42 207 28 214 Z" opacity="0.8"/>
+          <circle cx="186" cy="10" r="1.8" opacity="1"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-bl" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:-5px;left:-5px;width:160px;pointer-events:none;opacity:0.10;transform:scaleY(-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 175 C20 148 42 125 68 105 C94 85 122 68 155 52" stroke="#8B1A1A" stroke-width="1.4" fill="none"/>
+          <path d="M62 108 C48 100 36 88 40 76 C44 64 55 63 62 71 C69 79 67 95 62 108 Z" opacity="0.8"/>
+          <path d="M96 82 C88 71 87 58 92 49 C97 40 107 39 111 48 C115 57 110 73 100 82 Z" opacity="0.75"/>
+          <path d="M5 175 C10 162 18 152 28 147 C38 142 47 144 48 151 C49 158 41 168 28 174 Z" opacity="0.75"/>
+          <path d="M148 54 C144 47 143 41 145 36 C147 31 151 30 153 33 C155 37 154 44 150 51 Z" opacity="0.8"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-br" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:-5px;right:-5px;width:160px;pointer-events:none;opacity:0.10;transform:scale(-1,-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 175 C20 148 42 125 68 105 C94 85 122 68 155 52" stroke="#8B1A1A" stroke-width="1.4" fill="none"/>
+          <path d="M62 108 C48 100 36 88 40 76 C44 64 55 63 62 71 C69 79 67 95 62 108 Z" opacity="0.8"/>
+          <path d="M96 82 C88 71 87 58 92 49 C97 40 107 39 111 48 C115 57 110 73 100 82 Z" opacity="0.75"/>
+          <path d="M5 175 C10 162 18 152 28 147 C38 142 47 144 48 151 C49 158 41 168 28 174 Z" opacity="0.75"/>
+          <path d="M148 54 C144 47 143 41 145 36 C147 31 151 30 153 33 C155 37 154 44 150 51 Z" opacity="0.8"/>
+        </g>
+      </svg>
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-subtitle">Our Families</p>
+        <h2 class="section-title">Gia Đình <span class="accent">Hai Bên</span></h2>
+        <div class="section-ornament">
+          <div class="line"></div>
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#B76E79"/>
+          </svg>
+          <div class="line"></div>
+        </div>
+      </div>
+      <div class="family-grid" id="family-grid">
+        <!-- NHÀ TRAI -->
+        <div class="family-card reveal-left">
+          <div class="family-avatar rose-bg">🤵</div>
+          <h3>Nhà Trai</h3>
+          <p class="sub">Gia đình chú rể</p>
+          <div class="family-info"><span class="label">Bố: </span><span class="name" id="data-groom-dad">Cao Văn Minh</span></div>
+          <div class="family-info"><span class="label">Mẹ: </span><span class="name" id="data-groom-mom">Hoàng Thị Hà</span></div>
+          <div class="family-divider">
+            <p class="small">Con trai</p>
+            <p class="big rose" id="data-groom-name">Cao Gia Khoa</p>
+          </div>
+        </div>
+
+        <div class="family-center-divider reveal">
+          <div class="v-line"></div>
+          <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <div class="v-line"></div>
+        </div>
+
+        <!-- NHÀ GÁI -->
+        <div class="family-card reveal-right">
+          <div class="family-avatar gold-bg">👰</div>
+          <h3>Nhà Gái</h3>
+          <p class="sub">Gia đình cô dâu</p>
+          <div class="family-info"><span class="label">Bố: </span><span class="name" id="data-bride-dad">Trần Văn Điệp</span></div>
+          <div class="family-info"><span class="label">Mẹ: </span><span class="name" id="data-bride-mom">Bùi Thị Vân</span></div>
+          <div class="family-divider">
+            <p class="small">Con gái</p>
+            <p class="big gold" id="data-bride-name">Trần Thị Thu Huyền</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── GALLERY ── -->
+  <section class="section paper-texture" id="gallery">
+      <svg class="sec-floral sec-floral-tl" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:-5px;left:-5px;width:180px;pointer-events:none;opacity:0.12">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 215 C18 185 40 158 65 130 C90 102 118 76 148 48 C162 34 175 20 188 8" stroke="#8B1A1A" stroke-width="1.6" fill="none"/>
+          <!-- Bông hoa lớn -->
+          <circle cx="186" cy="10" r="3.5"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(0   186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(72  186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(144 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(216 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(288 186 10)"/>
+          <circle cx="186" cy="10" r="5" fill="none" stroke="#8B1A1A" stroke-width="0.8"/>
+          <!-- Nụ nhỏ -->
+          <path d="M143 50 C139 43 138 36 140 31 C142 26 146 25 148 28 C150 32 149 39 145 46 Z"/>
+          <path d="M148 28 C152 23 156 23 157 27 C158 31 155 38 151 44 C148 48 145 50 143 50 Z" opacity="0.8"/>
+          <!-- Lá -->
+          <path d="M62 133 C50 125 40 112 44 99 C48 86 60 85 67 94 C74 103 72 120 62 133 Z" opacity="0.85"/>
+          <path d="M92 103 C84 92 83 78 88 68 C93 58 104 57 108 66 C112 75 108 92 96 102 Z" opacity="0.8"/>
+          <!-- Lá dưới lớn -->
+          <path d="M5 215 C10 200 18 190 28 184 C38 178 48 180 49 188 C50 196 42 207 28 214 Z" opacity="0.8"/>
+          <circle cx="186" cy="10" r="1.8" opacity="1"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-tr" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:-5px;right:-5px;width:180px;pointer-events:none;opacity:0.12;transform:scaleX(-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 215 C18 185 40 158 65 130 C90 102 118 76 148 48 C162 34 175 20 188 8" stroke="#8B1A1A" stroke-width="1.6" fill="none"/>
+          <circle cx="186" cy="10" r="3.5"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(0   186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(72  186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(144 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(216 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(288 186 10)"/>
+          <circle cx="186" cy="10" r="5" fill="none" stroke="#8B1A1A" stroke-width="0.8"/>
+          <path d="M143 50 C139 43 138 36 140 31 C142 26 146 25 148 28 C150 32 149 39 145 46 Z"/>
+          <path d="M148 28 C152 23 156 23 157 27 C158 31 155 38 151 44 C148 48 145 50 143 50 Z" opacity="0.8"/>
+          <path d="M62 133 C50 125 40 112 44 99 C48 86 60 85 67 94 C74 103 72 120 62 133 Z" opacity="0.85"/>
+          <path d="M92 103 C84 92 83 78 88 68 C93 58 104 57 108 66 C112 75 108 92 96 102 Z" opacity="0.8"/>
+          <path d="M5 215 C10 200 18 190 28 184 C38 178 48 180 49 188 C50 196 42 207 28 214 Z" opacity="0.8"/>
+          <circle cx="186" cy="10" r="1.8" opacity="1"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-bl" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:-5px;left:-5px;width:160px;pointer-events:none;opacity:0.10;transform:scaleY(-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 175 C20 148 42 125 68 105 C94 85 122 68 155 52" stroke="#8B1A1A" stroke-width="1.4" fill="none"/>
+          <path d="M62 108 C48 100 36 88 40 76 C44 64 55 63 62 71 C69 79 67 95 62 108 Z" opacity="0.8"/>
+          <path d="M96 82 C88 71 87 58 92 49 C97 40 107 39 111 48 C115 57 110 73 100 82 Z" opacity="0.75"/>
+          <path d="M5 175 C10 162 18 152 28 147 C38 142 47 144 48 151 C49 158 41 168 28 174 Z" opacity="0.75"/>
+          <path d="M148 54 C144 47 143 41 145 36 C147 31 151 30 153 33 C155 37 154 44 150 51 Z" opacity="0.8"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-br" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:-5px;right:-5px;width:160px;pointer-events:none;opacity:0.10;transform:scale(-1,-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 175 C20 148 42 125 68 105 C94 85 122 68 155 52" stroke="#8B1A1A" stroke-width="1.4" fill="none"/>
+          <path d="M62 108 C48 100 36 88 40 76 C44 64 55 63 62 71 C69 79 67 95 62 108 Z" opacity="0.8"/>
+          <path d="M96 82 C88 71 87 58 92 49 C97 40 107 39 111 48 C115 57 110 73 100 82 Z" opacity="0.75"/>
+          <path d="M5 175 C10 162 18 152 28 147 C38 142 47 144 48 151 C49 158 41 168 28 174 Z" opacity="0.75"/>
+          <path d="M148 54 C144 47 143 41 145 36 C147 31 151 30 153 33 C155 37 154 44 150 51 Z" opacity="0.8"/>
+        </g>
+      </svg>
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-subtitle">Our Moments</p>
+        <h2 class="section-title">Khoảnh Khắc <span class="accent">Đáng Nhớ</span></h2>
+        <div class="section-ornament">
+          <div class="line"></div>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#B76E79" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="m21 15-5-5L5 21"/>
+          </svg>
+          <div class="line"></div>
+        </div>
+        <p class="section-desc">Những bức ảnh ghi lại hành trình tình yêu của chúng tôi.</p>
+      </div>
+      <!-- Gallery items được render tự động bởi js/main.js từ galleryData -->
+      <div class="gallery-masonry" id="gallery-masonry"></div>
+    </div>
+  </section>
+
+
+  <!-- ── EVENTS ── -->
+  <section class="section paper-texture" id="events">
+      <svg class="sec-floral sec-floral-tl" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:-5px;left:-5px;width:180px;pointer-events:none;opacity:0.12">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 215 C18 185 40 158 65 130 C90 102 118 76 148 48 C162 34 175 20 188 8" stroke="#8B1A1A" stroke-width="1.6" fill="none"/>
+          <!-- Bông hoa lớn -->
+          <circle cx="186" cy="10" r="3.5"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(0   186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(72  186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(144 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(216 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(288 186 10)"/>
+          <circle cx="186" cy="10" r="5" fill="none" stroke="#8B1A1A" stroke-width="0.8"/>
+          <!-- Nụ nhỏ -->
+          <path d="M143 50 C139 43 138 36 140 31 C142 26 146 25 148 28 C150 32 149 39 145 46 Z"/>
+          <path d="M148 28 C152 23 156 23 157 27 C158 31 155 38 151 44 C148 48 145 50 143 50 Z" opacity="0.8"/>
+          <!-- Lá -->
+          <path d="M62 133 C50 125 40 112 44 99 C48 86 60 85 67 94 C74 103 72 120 62 133 Z" opacity="0.85"/>
+          <path d="M92 103 C84 92 83 78 88 68 C93 58 104 57 108 66 C112 75 108 92 96 102 Z" opacity="0.8"/>
+          <!-- Lá dưới lớn -->
+          <path d="M5 215 C10 200 18 190 28 184 C38 178 48 180 49 188 C50 196 42 207 28 214 Z" opacity="0.8"/>
+          <circle cx="186" cy="10" r="1.8" opacity="1"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-tr" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:-5px;right:-5px;width:180px;pointer-events:none;opacity:0.12;transform:scaleX(-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 215 C18 185 40 158 65 130 C90 102 118 76 148 48 C162 34 175 20 188 8" stroke="#8B1A1A" stroke-width="1.6" fill="none"/>
+          <circle cx="186" cy="10" r="3.5"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(0   186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(72  186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(144 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(216 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(288 186 10)"/>
+          <circle cx="186" cy="10" r="5" fill="none" stroke="#8B1A1A" stroke-width="0.8"/>
+          <path d="M143 50 C139 43 138 36 140 31 C142 26 146 25 148 28 C150 32 149 39 145 46 Z"/>
+          <path d="M148 28 C152 23 156 23 157 27 C158 31 155 38 151 44 C148 48 145 50 143 50 Z" opacity="0.8"/>
+          <path d="M62 133 C50 125 40 112 44 99 C48 86 60 85 67 94 C74 103 72 120 62 133 Z" opacity="0.85"/>
+          <path d="M92 103 C84 92 83 78 88 68 C93 58 104 57 108 66 C112 75 108 92 96 102 Z" opacity="0.8"/>
+          <path d="M5 215 C10 200 18 190 28 184 C38 178 48 180 49 188 C50 196 42 207 28 214 Z" opacity="0.8"/>
+          <circle cx="186" cy="10" r="1.8" opacity="1"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-bl" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:-5px;left:-5px;width:160px;pointer-events:none;opacity:0.10;transform:scaleY(-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 175 C20 148 42 125 68 105 C94 85 122 68 155 52" stroke="#8B1A1A" stroke-width="1.4" fill="none"/>
+          <path d="M62 108 C48 100 36 88 40 76 C44 64 55 63 62 71 C69 79 67 95 62 108 Z" opacity="0.8"/>
+          <path d="M96 82 C88 71 87 58 92 49 C97 40 107 39 111 48 C115 57 110 73 100 82 Z" opacity="0.75"/>
+          <path d="M5 175 C10 162 18 152 28 147 C38 142 47 144 48 151 C49 158 41 168 28 174 Z" opacity="0.75"/>
+          <path d="M148 54 C144 47 143 41 145 36 C147 31 151 30 153 33 C155 37 154 44 150 51 Z" opacity="0.8"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-br" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:-5px;right:-5px;width:160px;pointer-events:none;opacity:0.10;transform:scale(-1,-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 175 C20 148 42 125 68 105 C94 85 122 68 155 52" stroke="#8B1A1A" stroke-width="1.4" fill="none"/>
+          <path d="M62 108 C48 100 36 88 40 76 C44 64 55 63 62 71 C69 79 67 95 62 108 Z" opacity="0.8"/>
+          <path d="M96 82 C88 71 87 58 92 49 C97 40 107 39 111 48 C115 57 110 73 100 82 Z" opacity="0.75"/>
+          <path d="M5 175 C10 162 18 152 28 147 C38 142 47 144 48 151 C49 158 41 168 28 174 Z" opacity="0.75"/>
+          <path d="M148 54 C144 47 143 41 145 36 C147 31 151 30 153 33 C155 37 154 44 150 51 Z" opacity="0.8"/>
+        </g>
+      </svg>
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-subtitle">Save the Date</p>
+        <h2 class="section-title">Chương Trình <span class="accent">Lễ Cưới</span></h2>
+        <div class="section-ornament">
+          <div class="line"></div>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#B76E79" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <div class="line"></div>
+        </div>
+      </div>
+
+      <div class="events-tl">
+        <!-- LỄ THÀNH HÔN -->
+        <div class="event-item reveal-left">
+          <div class="event-dot rose-dot">💒</div>
+          <div class="event-card">
+            <h3 id="data-ceremony-label">Lễ Thành Hôn</h3>
+            <p class="event-sub">Nghi lễ truyền thống</p>
+            <div class="event-detail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C5A55A" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              <div><span class="dl">Ngày: </span><span class="dv" id="data-ceremony-date">Thứ Bảy, 03/04/2026</span></div>
+            </div>
+            <div class="event-detail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C5A55A" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <div><span class="dl">Thời gian: </span><span class="dv" id="data-ceremony-time">08:00 sáng</span></div>
+            </div>
+            <div class="event-detail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C5A55A" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <div>
+                <span class="dl" id="data-ceremony-host">Tư gia nhà trai</span><br>
+                <span class="dv" id="data-ceremony-addr" style="font-size:13px">Số 25B/7/75 Trung Hành, Hải An, Hải Phòng</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TIỆC CƯỚI -->
+        <div class="event-item reveal-right">
+          <div class="event-dot gold-dot">🥂</div>
+          <div class="event-card">
+            <h3 id="data-reception-label">Tiệc Cưới</h3>
+            <p class="event-sub">Chiêu đãi khách mời</p>
+            <div class="event-detail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#B76E79" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              <div><span class="dl">Ngày: </span><span class="dv" id="data-reception-date">Chủ Nhật, 04/04/2026</span></div>
+            </div>
+            <div class="event-detail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#B76E79" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <div>
+                <span class="dl">Đón khách: </span><span class="dv">10:30</span><br>
+                <span class="dl">Tiệc: </span><span class="dv">11:00 — 14:00</span>
+              </div>
+            </div>
+            <div class="event-detail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#B76E79" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <div>
+                <span class="dl" id="data-reception-venue">TT Tiệc cưới Giang Thanh</span><br>
+                <span class="dv" id="data-reception-addr" style="font-size:13px">Cầu Rào 1, Hải Phòng</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAP -->
+      <div class="map-wrap reveal">
+        <div class="map-header">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" fill="#B76E79"/>
+            <circle cx="12" cy="10" r="3" fill="white"/>
+          </svg>
+          Bản đồ địa điểm
+        </div>
+        <iframe id="map-iframe" class="map-embed"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.2!2d106.6972643!3d20.8304463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a71669aa314fd%3A0x8e327bd77023efc5!2zVHJ1bmcgdMOibSB0aeG7hWMgY8awcm9pIEdpYW5nIFRoYW5o!5e0!3m2!1svi!2svn!4v1700000000000!5m2!1svi!2svn"
+          allowfullscreen loading="lazy">
+        </iframe>
+      </div>
+
+      <!-- NEARBY -->
+      <div class="nearby-section reveal">
+        <div class="nearby-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C5A55A" stroke-width="1.8" width="18" height="18">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          <span>Khám Phá Gần Đây</span>
+        </div>
+        <div class="nearby-grid" id="nearby-grid">
+          <div class="nearby-card">
+            <div class="nearby-icon" style="background:linear-gradient(135deg,#f093a0,#e66b78)">🛒</div>
+            <div class="nearby-info">
+              <h4>Chợ Cát Bi</h4>
+              <p>Chợ truyền thống sầm uất, mua sắm đặc sản Hải Phòng</p>
+              <span class="nearby-dist">📍 ~1.6 km · ⭐ 4.3</span>
+            </div>
+          </div>
+          <div class="nearby-card">
+            <div class="nearby-icon" style="background:linear-gradient(135deg,#a8c8a0,#7aad72)">🥥</div>
+            <div class="nearby-info">
+              <h4>Dừa Dầm Cô Tuyến</h4>
+              <p>53 Lạch Tray</p>
+              <span class="nearby-dist">📍 ~1.9 km · ⭐ 4.3</span>
+            </div>
+          </div>
+          <div class="nearby-card">
+            <div class="nearby-icon" style="background:linear-gradient(135deg,#f5c77a,#e8a050)">🥖</div>
+            <div class="nearby-info">
+              <h4>Bánh Mỳ Cay Khánh Nạp</h4>
+              <p>172 Hàng Kênh (Nhà Cổ)</p>
+              <span class="nearby-dist">📍 ~2.3 km · ⭐ 4.3</span>
+            </div>
+          </div>
+          <div class="nearby-card">
+            <div class="nearby-icon" style="background:linear-gradient(135deg,#90b8d4,#5a8ab0)">🐚</div>
+            <div class="nearby-info">
+              <h4>Ốc Thủy Dương</h4>
+              <p>30 Ngõ 263 Lạch Tray</p>
+              <span class="nearby-dist">📍 ~0.3 km · ⭐ 4.7</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── RSVP ── -->
+  <section class="section paper-texture" id="rsvp">
+      <svg class="sec-floral sec-floral-tl" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:-5px;left:-5px;width:180px;pointer-events:none;opacity:0.12">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 215 C18 185 40 158 65 130 C90 102 118 76 148 48 C162 34 175 20 188 8" stroke="#8B1A1A" stroke-width="1.6" fill="none"/>
+          <!-- Bông hoa lớn -->
+          <circle cx="186" cy="10" r="3.5"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(0   186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(72  186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(144 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(216 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(288 186 10)"/>
+          <circle cx="186" cy="10" r="5" fill="none" stroke="#8B1A1A" stroke-width="0.8"/>
+          <!-- Nụ nhỏ -->
+          <path d="M143 50 C139 43 138 36 140 31 C142 26 146 25 148 28 C150 32 149 39 145 46 Z"/>
+          <path d="M148 28 C152 23 156 23 157 27 C158 31 155 38 151 44 C148 48 145 50 143 50 Z" opacity="0.8"/>
+          <!-- Lá -->
+          <path d="M62 133 C50 125 40 112 44 99 C48 86 60 85 67 94 C74 103 72 120 62 133 Z" opacity="0.85"/>
+          <path d="M92 103 C84 92 83 78 88 68 C93 58 104 57 108 66 C112 75 108 92 96 102 Z" opacity="0.8"/>
+          <!-- Lá dưới lớn -->
+          <path d="M5 215 C10 200 18 190 28 184 C38 178 48 180 49 188 C50 196 42 207 28 214 Z" opacity="0.8"/>
+          <circle cx="186" cy="10" r="1.8" opacity="1"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-tr" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:-5px;right:-5px;width:180px;pointer-events:none;opacity:0.12;transform:scaleX(-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 215 C18 185 40 158 65 130 C90 102 118 76 148 48 C162 34 175 20 188 8" stroke="#8B1A1A" stroke-width="1.6" fill="none"/>
+          <circle cx="186" cy="10" r="3.5"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(0   186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(72  186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(144 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(216 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(288 186 10)"/>
+          <circle cx="186" cy="10" r="5" fill="none" stroke="#8B1A1A" stroke-width="0.8"/>
+          <path d="M143 50 C139 43 138 36 140 31 C142 26 146 25 148 28 C150 32 149 39 145 46 Z"/>
+          <path d="M148 28 C152 23 156 23 157 27 C158 31 155 38 151 44 C148 48 145 50 143 50 Z" opacity="0.8"/>
+          <path d="M62 133 C50 125 40 112 44 99 C48 86 60 85 67 94 C74 103 72 120 62 133 Z" opacity="0.85"/>
+          <path d="M92 103 C84 92 83 78 88 68 C93 58 104 57 108 66 C112 75 108 92 96 102 Z" opacity="0.8"/>
+          <path d="M5 215 C10 200 18 190 28 184 C38 178 48 180 49 188 C50 196 42 207 28 214 Z" opacity="0.8"/>
+          <circle cx="186" cy="10" r="1.8" opacity="1"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-bl" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:-5px;left:-5px;width:160px;pointer-events:none;opacity:0.10;transform:scaleY(-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 175 C20 148 42 125 68 105 C94 85 122 68 155 52" stroke="#8B1A1A" stroke-width="1.4" fill="none"/>
+          <path d="M62 108 C48 100 36 88 40 76 C44 64 55 63 62 71 C69 79 67 95 62 108 Z" opacity="0.8"/>
+          <path d="M96 82 C88 71 87 58 92 49 C97 40 107 39 111 48 C115 57 110 73 100 82 Z" opacity="0.75"/>
+          <path d="M5 175 C10 162 18 152 28 147 C38 142 47 144 48 151 C49 158 41 168 28 174 Z" opacity="0.75"/>
+          <path d="M148 54 C144 47 143 41 145 36 C147 31 151 30 153 33 C155 37 154 44 150 51 Z" opacity="0.8"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-br" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:-5px;right:-5px;width:160px;pointer-events:none;opacity:0.10;transform:scale(-1,-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 175 C20 148 42 125 68 105 C94 85 122 68 155 52" stroke="#8B1A1A" stroke-width="1.4" fill="none"/>
+          <path d="M62 108 C48 100 36 88 40 76 C44 64 55 63 62 71 C69 79 67 95 62 108 Z" opacity="0.8"/>
+          <path d="M96 82 C88 71 87 58 92 49 C97 40 107 39 111 48 C115 57 110 73 100 82 Z" opacity="0.75"/>
+          <path d="M5 175 C10 162 18 152 28 147 C38 142 47 144 48 151 C49 158 41 168 28 174 Z" opacity="0.75"/>
+          <path d="M148 54 C144 47 143 41 145 36 C147 31 151 30 153 33 C155 37 154 44 150 51 Z" opacity="0.8"/>
+        </g>
+      </svg>
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Xác Nhận <span class="accent">Tham Dự</span></h2>
+        <div class="section-ornament">
+          <div class="line"></div>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#B76E79" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M22 21v-2a4 4 0 00-3-3.87"/>
+            <path d="M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+          <div class="line"></div>
+        </div>
+        <p class="section-desc">Xin quý khách vui lòng xác nhận sự hiện diện trước ngày 25/03/2026.</p>
+      </div>
+      <div class="rsvp-card reveal">
+        <form id="rsvp-form" onsubmit="submitForm(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Họ và tên *</label>
+              <input type="text" id="f-name" placeholder="Nguyễn Văn A" required>
+            </div>
+            <div class="form-group">
+              <label>Số người tham dự *</label>
+              <select id="f-guests">
+                <option value="1">1 người</option>
+                <option value="2">2 người</option>
+                <option value="3">3 người</option>
+                <option value="4">4 người</option>
+                <option value="5">5 người</option>
+              </select>
+            </div>
+          </div>
+          <p class="attend-label">Xác nhận tham dự *</p>
+          <div class="attend-opts">
+            <label class="attend-opt active" id="opt-yes" onclick="pickAttend('yes')">
+              <input type="radio" name="attend" value="yes" checked>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              Sẽ tham dự
+            </label>
+            <label class="attend-opt" id="opt-no" onclick="pickAttend('no')">
+              <input type="radio" name="attend" value="no">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+              Không thể tham dự
+            </label>
+          </div>
+          <button type="submit" class="submit-btn">
+            <svg viewBox="0 0 24 24">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+            Gửi Xác Nhận
+          </button>
+        </form>
+        <div class="success-box" id="success-box">
+          <div class="success-check">
+            <svg viewBox="0 0 24 24">
+              <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3>Cảm ơn bạn!</h3>
+          <p>Xác nhận đã được gửi thành công.<br>Chúng tôi rất mong được gặp bạn!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── GIFT ── -->
+  <section class="section paper-texture" id="gift">
+      <svg class="sec-floral sec-floral-tl" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:-5px;left:-5px;width:180px;pointer-events:none;opacity:0.12">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 215 C18 185 40 158 65 130 C90 102 118 76 148 48 C162 34 175 20 188 8" stroke="#8B1A1A" stroke-width="1.6" fill="none"/>
+          <!-- Bông hoa lớn -->
+          <circle cx="186" cy="10" r="3.5"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(0   186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(72  186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(144 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(216 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(288 186 10)"/>
+          <circle cx="186" cy="10" r="5" fill="none" stroke="#8B1A1A" stroke-width="0.8"/>
+          <!-- Nụ nhỏ -->
+          <path d="M143 50 C139 43 138 36 140 31 C142 26 146 25 148 28 C150 32 149 39 145 46 Z"/>
+          <path d="M148 28 C152 23 156 23 157 27 C158 31 155 38 151 44 C148 48 145 50 143 50 Z" opacity="0.8"/>
+          <!-- Lá -->
+          <path d="M62 133 C50 125 40 112 44 99 C48 86 60 85 67 94 C74 103 72 120 62 133 Z" opacity="0.85"/>
+          <path d="M92 103 C84 92 83 78 88 68 C93 58 104 57 108 66 C112 75 108 92 96 102 Z" opacity="0.8"/>
+          <!-- Lá dưới lớn -->
+          <path d="M5 215 C10 200 18 190 28 184 C38 178 48 180 49 188 C50 196 42 207 28 214 Z" opacity="0.8"/>
+          <circle cx="186" cy="10" r="1.8" opacity="1"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-tr" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:-5px;right:-5px;width:180px;pointer-events:none;opacity:0.12;transform:scaleX(-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 215 C18 185 40 158 65 130 C90 102 118 76 148 48 C162 34 175 20 188 8" stroke="#8B1A1A" stroke-width="1.6" fill="none"/>
+          <circle cx="186" cy="10" r="3.5"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(0   186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(72  186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(144 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(216 186 10)"/>
+          <ellipse cx="186" cy="1"  rx="5" ry="8" transform="rotate(288 186 10)"/>
+          <circle cx="186" cy="10" r="5" fill="none" stroke="#8B1A1A" stroke-width="0.8"/>
+          <path d="M143 50 C139 43 138 36 140 31 C142 26 146 25 148 28 C150 32 149 39 145 46 Z"/>
+          <path d="M148 28 C152 23 156 23 157 27 C158 31 155 38 151 44 C148 48 145 50 143 50 Z" opacity="0.8"/>
+          <path d="M62 133 C50 125 40 112 44 99 C48 86 60 85 67 94 C74 103 72 120 62 133 Z" opacity="0.85"/>
+          <path d="M92 103 C84 92 83 78 88 68 C93 58 104 57 108 66 C112 75 108 92 96 102 Z" opacity="0.8"/>
+          <path d="M5 215 C10 200 18 190 28 184 C38 178 48 180 49 188 C50 196 42 207 28 214 Z" opacity="0.8"/>
+          <circle cx="186" cy="10" r="1.8" opacity="1"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-bl" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:-5px;left:-5px;width:160px;pointer-events:none;opacity:0.10;transform:scaleY(-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 175 C20 148 42 125 68 105 C94 85 122 68 155 52" stroke="#8B1A1A" stroke-width="1.4" fill="none"/>
+          <path d="M62 108 C48 100 36 88 40 76 C44 64 55 63 62 71 C69 79 67 95 62 108 Z" opacity="0.8"/>
+          <path d="M96 82 C88 71 87 58 92 49 C97 40 107 39 111 48 C115 57 110 73 100 82 Z" opacity="0.75"/>
+          <path d="M5 175 C10 162 18 152 28 147 C38 142 47 144 48 151 C49 158 41 168 28 174 Z" opacity="0.75"/>
+          <path d="M148 54 C144 47 143 41 145 36 C147 31 151 30 153 33 C155 37 154 44 150 51 Z" opacity="0.8"/>
+        </g>
+      </svg>
+      <svg class="sec-floral sec-floral-br" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:-5px;right:-5px;width:160px;pointer-events:none;opacity:0.10;transform:scale(-1,-1)">
+        <g stroke="#8B1A1A" fill="#8B1A1A">
+          <path d="M5 175 C20 148 42 125 68 105 C94 85 122 68 155 52" stroke="#8B1A1A" stroke-width="1.4" fill="none"/>
+          <path d="M62 108 C48 100 36 88 40 76 C44 64 55 63 62 71 C69 79 67 95 62 108 Z" opacity="0.8"/>
+          <path d="M96 82 C88 71 87 58 92 49 C97 40 107 39 111 48 C115 57 110 73 100 82 Z" opacity="0.75"/>
+          <path d="M5 175 C10 162 18 152 28 147 C38 142 47 144 48 151 C49 158 41 168 28 174 Z" opacity="0.75"/>
+          <path d="M148 54 C144 47 143 41 145 36 C147 31 151 30 153 33 C155 37 154 44 150 51 Z" opacity="0.8"/>
+        </g>
+      </svg>
+    <div class="section-header reveal">
+      <h2 class="section-title">Hộp <span class="accent">Chúc Phúc</span></h2>
+      <div class="section-ornament">
+        <div class="line"></div>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#B76E79" stroke-width="2">
+          <path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/>
+          <path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/>
+          <path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/>
+        </svg>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="lixi-wrapper reveal">
+      <div class="lixi-particles" id="lixi-particles"></div>
+      <div class="lixi-container" id="lixi-container" onclick="openGiftPopup()">
+        <div class="lixi-envelope">
+          <div class="lixi-flap"><div class="lixi-flap-fold"></div></div>
+          <div class="lixi-body">
+            <div class="lixi-inner-border"></div>
+            <div class="lixi-logo">
+              <div class="lixi-logo-circle">
+                <div class="lixi-logo-inner">
+                  <span class="lixi-logo-names">H &amp; K</span>
+                </div>
+              </div>
+            </div>
+            <div class="lixi-songhy">囍</div>
+            <div class="lixi-trim-top"></div>
+            <div class="lixi-trim-bottom"></div>
+          </div>
+        </div>
+        <p class="lixi-cta">✨ Nhấn để mở ✨</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-ornament">
+      <div class="line"></div>
+      <svg viewBox="0 0 24 24">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+      <div class="line"></div>
+    </div>
+    <p class="footer-names">Gia Khoa & Thu Huyền</p>
+    <p class="footer-date">04 · 04 · 2026 — HẢI PHÒNG</p>
+    <p class="footer-text">Cảm ơn bạn đã dành thời gian chia vui cùng chúng tớ trong ngày đặc biệt này.</p>
+    <p class="footer-credit">Made with ❤ by H&K • © 2026</p>
+  </footer>
+
+</div><!-- /#main-content -->
+
+
+<!-- ════════════════════════════════════════════════════════
+     GIFT POPUP
+     ════════════════════════════════════════════════════════ -->
+<div class="gift-popup-overlay" id="gift-popup" onclick="closeGiftPopup(event)">
+  <div class="gift-popup" onclick="event.stopPropagation()">
+    <button class="gift-popup-close" onclick="closeGiftPopup()">&times;</button>
+    <div class="gift-popup-header">
+      <div class="gift-popup-icon">🧧</div>
+      <h2>Hộp Chúc Phúc</h2>
+      <p>Cảm ơn bạn đã gửi lời chúc phúc đến cô dâu & chú rể</p>
+    </div>
+    <div class="gift-qr-grid" id="gift-qr-grid">
+      <div class="gift-qr-card groom-card">
+        <div class="gift-qr-avatar">🤵</div>
+        <h3>Chú Rể</h3>
+        <p class="gift-qr-name">Cao Gia Khoa</p>
+        <img id="qr-groom-img" alt="QR Chú Rể"
+          style="width:160px;height:160px;margin:0 auto 12px;display:block;border-radius:10px;border:2px solid var(--gold-light);object-fit:cover">
+        <div class="gift-qr-info">
+          <p><strong>Ngân hàng:</strong> SHB</p>
+          <p><strong>Số TK:</strong> 0334552941</p>
+          <p><strong>Chủ TK:</strong> CAO GIA KHOA</p>
+        </div>
+      </div>
+      <div class="gift-qr-card bride-card">
+        <div class="gift-qr-avatar">👰</div>
+        <h3>Cô Dâu</h3>
+        <p class="gift-qr-name">Trần Thị Thu Huyền</p>
+        <img id="qr-bride-img" alt="QR Cô Dâu"
+          style="width:160px;height:160px;margin:0 auto 12px;display:block;border-radius:10px;border:2px solid var(--gold-light);object-fit:cover">
+        <div class="gift-qr-info">
+          <p><strong>Ngân hàng:</strong> SHB</p>
+          <p><strong>Số TK:</strong> 180195230703</p>
+          <p><strong>Chủ TK:</strong> TRAN THI THU HUYEN</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     LIGHTBOX
+     ════════════════════════════════════════════════════════ -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLB()">&times;</button>
+  <button class="lb-nav lb-prev" onclick="event.stopPropagation();navLB(-1)">&#10094;</button>
+  <button class="lb-nav lb-next" onclick="event.stopPropagation();navLB(1)">&#10095;</button>
+  <div class="lb-content" id="lb-content" onclick="event.stopPropagation()"></div>
+</div>
+
+
+<!-- Scripts -->
+<script src="js/main.js"></script>
+</body>
+</html>

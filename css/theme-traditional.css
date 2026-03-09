@@ -1,0 +1,290 @@
+/* ============================================================
+   THEME OVERRIDE — Thiệp Cưới Truyền Thống
+   Nền kem/giấy cổ + họa tiết hoa đỏ thẫm (#8B1A1A)
+   Ghi đè toàn bộ navy/dark theme về cream/ivory
+   ============================================================ */
+
+/* ── NEW COLOR VARIABLES ── */
+:root {
+  /* Nền giấy cổ */
+  --cream:        #F5EFE6;
+  --cream-dark:   #EDE3D5;
+  --cream-deeper: #E4D5C1;
+  --paper:        #FAF6F0;
+  --paper-warm:   #F2EBE0;
+
+  /* Đỏ thẫm truyền thống */
+  --crimson:       #8B1A1A;
+  --crimson-light: #A52828;
+  --crimson-pale:  rgba(139,26,26,0.08);
+  --crimson-glow:  rgba(139,26,26,0.15);
+
+  /* Gold ấm */
+  --gold:       #B8860B;
+  --gold-light: #C9A227;
+  --gold-pale:  rgba(184,134,11,0.15);
+  --gold-glow:  rgba(184,134,11,0.2);
+
+  /* Text */
+  --charcoal:   #2C1810;
+  --text:       #3D2415;
+  --text-light: #7A6050;
+  --rose:       #8B1A1A;
+  --rose-light: #A52828;
+  --rose-deep:  #6B1010;
+
+  /* Xoá navy */
+  --navy:       #8B1A1A;
+  --navy-mid:   #A52828;
+  --navy-deep:  #6B1010;
+  --navy-accent:#8B1A1A;
+}
+
+/* ── BODY & BASE ── */
+body {
+  background: var(--paper);
+  color: var(--text);
+}
+
+/* ── TEXTURE NỀN GIẤY CỔ TOÀN TRANG ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 400px 400px;
+  background-repeat: repeat;
+  opacity: 1;
+}
+body > * { position: relative; z-index: 1; }
+
+/* ── LAYOUT SECTIONS — đổi nền về cream ── */
+.section { background: var(--paper-warm); }
+#family  { background: var(--paper); }
+#gallery { background: var(--paper-warm); }
+#events  { background: var(--paper); }
+#rsvp    { background: var(--paper-warm); }
+#gift    { background: var(--paper); }
+
+/* ── SECTION TITLES ── */
+.section-title { color: var(--charcoal); }
+.section-title .accent { color: var(--crimson); }
+.section-ornament .line { background: var(--crimson-light); opacity: 0.4; }
+.section-subtitle { color: var(--text-light); }
+.section-desc { color: var(--text-light); }
+
+/* ── PRELOADER ── */
+#preloader { background: var(--paper); }
+.preloader-heart::before,
+.preloader-heart::after { background: var(--crimson); }
+.preloader-text { color: var(--text-light); }
+
+/* ── ENVELOPE ── */
+#envelope-screen {
+  background: linear-gradient(160deg, #f5efe6, #f0e8db, #ede0cc);
+}
+.envelope-body {
+  background: linear-gradient(175deg, #a01830 0%, #8b1020 40%, #6b0010 100%);
+  box-shadow: 0 30px 60px -15px rgba(107,0,16,.45), 0 0 40px var(--gold-glow);
+}
+.envelope-flap {
+  background: linear-gradient(180deg, #c42040, #a01830, #8b1020);
+}
+.wax-seal {
+  background: linear-gradient(140deg, var(--gold), #c9a227, #8B6914);
+}
+
+/* ── HERO — tách biệt nền ảnh, không đổi ── */
+/* Hero overlay fade sang cream thay vì navy */
+.hero-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.08) 0%,
+    rgba(0,0,0,0.04) 40%,
+    rgba(90,20,10,0.65) 85%,
+    rgba(107,16,16,0.90) 100%
+  );
+}
+
+/* ── HERO INTRO — nền đỏ thẫm truyền thống ── */
+.hero-intro {
+  background:
+    linear-gradient(180deg, #6B1010 0%, #8B1A1A 50%, #6B1010 100%);
+  position: relative;
+}
+/* Họa tiết nền mờ */
+.hero-intro::after {
+  content: '';
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  background-size: 400px 400px;
+  opacity: 0.5;
+}
+.hero-intro::before {
+  background: linear-gradient(90deg, transparent, rgba(201,162,39,.6), transparent);
+  z-index: 2;
+}
+
+/* Màu chữ hero-intro */
+.hero-intro-names h1 { color: #FFF8EE; text-shadow: 0 2px 20px rgba(0,0,0,.3); }
+.hero-intro-amp span { color: var(--gold-light); }
+.hero-intro-amp .line { background: rgba(201,162,39,.4); }
+.hero-intro-ornament .line { background: rgba(201,162,39,.4); }
+.hero-intro-ornament svg { fill: rgba(255,220,180,.7); }
+.hero-intro-date { color: rgba(255,240,210,.55); }
+.hero-intro-cta {
+  color: var(--gold-light);
+  border-color: rgba(201,162,39,.5);
+}
+.hero-intro-cta:hover {
+  background: rgba(201,162,39,.15);
+  border-color: var(--gold-light);
+}
+.hero-intro-cta svg { fill: var(--gold-light); }
+
+/* Hoa góc hero-intro — tăng opacity lên cho rõ hơn */
+.hero-intro .floral-tl,
+.hero-intro .floral-tr,
+.hero-intro .floral-bl,
+.hero-intro .floral-br { opacity: 0.30; }
+
+/* ── COUNTDOWN — giữ nền đỏ thẫm liên tục với hero-intro ── */
+#countdown-section {
+  background: linear-gradient(135deg, #6B1010 0%, #8B1A1A 40%, #A52828 70%, #8B1A1A 100%) !important;
+}
+/* Hoa countdown rõ hơn */
+#countdown-section .floral-tl,
+#countdown-section .floral-tr,
+#countdown-section .floral-bl,
+#countdown-section .floral-br { opacity: 0.22; }
+
+.countdown-label { color: rgba(255,248,230,.95); }
+.countdown-sub { color: rgba(255,230,190,.55); }
+.countdown-unit {
+  background: rgba(255,255,255,.07) !important;
+  border-color: rgba(255,215,0,.15) !important;
+}
+.countdown-num { color: var(--gold-light) !important; }
+.countdown-txt { color: rgba(255,230,190,.55) !important; }
+.countdown-sep { color: var(--gold-light) !important; }
+.cds-item {
+  background: rgba(255,255,255,.06) !important;
+  border-color: rgba(255,215,0,.1) !important;
+}
+.cds-label { color: rgba(255,230,190,.5) !important; }
+.cds-date  { color: var(--gold-light) !important; }
+.cds-event { color: rgba(255,230,190,.7) !important; }
+.cds-heart svg { fill: rgba(255,180,180,.6) !important; }
+.add-cal-btn { background: rgba(255,255,255,.12) !important; color: rgba(255,230,190,.8) !important; }
+.add-cal-btn:hover { background: rgba(255,255,255,.2) !important; }
+
+/* ── FAMILY CARDS ── */
+.family-card {
+  background: var(--paper);
+  border-color: rgba(139,26,26,.12);
+  box-shadow: 0 4px 20px rgba(139,26,26,.06);
+}
+.family-card h3 { color: var(--charcoal); }
+.family-card .sub { color: var(--text-light); }
+.family-info .name { color: var(--charcoal); }
+.family-divider { border-top-color: rgba(139,26,26,.12); }
+.family-divider .big.rose { color: var(--crimson); }
+.family-divider .big.gold { color: var(--gold); }
+.family-center-divider svg { fill: var(--crimson); }
+.family-center-divider .v-line { background: rgba(139,26,26,.25); }
+
+/* ── GALLERY HOVER ── */
+.gallery-hover { background: rgba(139,26,26,.35); }
+.gallery-hover svg { stroke: white; }
+
+/* ── EVENT CARDS ── */
+.event-card {
+  background: var(--paper);
+  border-color: rgba(139,26,26,.1);
+}
+.event-dot { box-shadow: 0 0 0 5px var(--paper), 0 4px 12px rgba(0,0,0,.1) !important; }
+.event-dot.rose-dot { background: var(--crimson) !important; }
+.event-dot.gold-dot { background: var(--gold) !important; }
+.events-tl::before {
+  background: linear-gradient(180deg, transparent, var(--crimson-light), var(--crimson-light), transparent) !important;
+  opacity: 0.4;
+}
+.add-cal-btn-event {
+  background: var(--crimson) !important;
+  color: white !important;
+}
+.add-cal-btn-event:hover { background: var(--crimson-light) !important; }
+
+/* ── MAP ── */
+.map-header { background: var(--paper); border-bottom-color: var(--cream-dark); }
+.map-header svg { fill: var(--crimson); }
+.map-wrap { border-color: rgba(139,26,26,.1); }
+.nearby-card { background: var(--paper); border-color: rgba(139,26,26,.08); }
+
+/* ── RSVP ── */
+.rsvp-card { background: var(--paper); border-color: rgba(139,26,26,.1); }
+.form-group label { color: var(--crimson); }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--crimson) !important;
+  box-shadow: 0 0 0 3px var(--crimson-glow) !important;
+}
+.attend-label { color: var(--crimson); }
+.attend-opt.active {
+  border-color: var(--crimson) !important;
+  background: var(--crimson-pale) !important;
+  color: var(--crimson) !important;
+}
+.submit-btn {
+  background: linear-gradient(135deg, var(--crimson), var(--crimson-light)) !important;
+  box-shadow: 0 6px 20px rgba(139,26,26,.3) !important;
+}
+.submit-btn:hover { box-shadow: 0 10px 30px rgba(139,26,26,.4) !important; }
+
+/* ── GIFT POPUP ── */
+.gift-popup { background: var(--paper); }
+.gift-popup-header h2 { color: var(--crimson); }
+.gift-qr-card { background: var(--cream); border-color: rgba(139,26,26,.12); }
+.groom-card { border-top-color: var(--gold) !important; }
+.bride-card { border-top-color: var(--crimson) !important; }
+.gift-qr-name { color: var(--crimson); }
+.groom-card .gift-qr-name { color: var(--gold); }
+
+/* ── SCROLL NAV DOTS ── */
+.scroll-dot { border-color: var(--crimson) !important; }
+.scroll-dot.active { background: var(--crimson) !important; }
+.scroll-dot::after { color: var(--crimson) !important; }
+
+/* ── MUSIC TOGGLE ── */
+.music-toggle { border-color: var(--crimson) !important; }
+.music-bar { background: var(--crimson) !important; }
+
+/* ── FOOTER — đỏ thẫm ── */
+footer {
+  background: linear-gradient(135deg, #4A0808, #6B1010, #4A0808) !important;
+  position: relative; overflow: hidden;
+}
+footer::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  pointer-events: none;
+}
+.footer-names { color: var(--gold-light); }
+.footer-ornament svg { fill: rgba(255,180,180,.6); }
+.footer-ornament .line { background: rgba(201,162,39,.3); }
+
+/* ── FLORAL — đổi màu SVG sang gold trên nền đỏ ── */
+.hero-intro g,
+#countdown-section g { fill: #C9A227; }
+.hero-intro g path[stroke],
+#countdown-section g path[stroke] { stroke: #C9A227; }
+
