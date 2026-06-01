@@ -1427,4 +1427,7 @@ function toggleMusic(){musicPlaying=!musicPlaying;document.getElementById('music
 window.addEventListener('load',()=>{setTimeout(()=>{const pl=document.getElementById('preloader');if(pl)pl.classList.add('hide');},800);});
 
 /* ══ GUEST PARAM ══ */
-(function(){const p=new URLSearchParams(location.search).get('guest');if(p){const d=document.getElementById('guest-display');const g=doc
+(function(){const p=new URLSearchParams(location.search).get('guest');if(p){const d=document.getElementById('guest-display');const g=document.getElementById('hero-greeting');if(d)d.textContent=decodeURIComponent(p);if(g)g.style.display='block';}})();
+</script>
+</body>
+</html>
