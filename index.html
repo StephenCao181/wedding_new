@@ -1436,10 +1436,13 @@ let musicPlaying=false;
 function toggleMusic(){musicPlaying=!musicPlaying;document.getElementById('music-toggle').classList.toggle('paused',!musicPlaying);}
 
 /* ══ PRELOADER ══ */
-window.addEventListener('load',()=>{setTimeout(()=>{const pl=document.getElementById('preloader');if(pl)pl.classList.add('hide');},800);});
+function hidePreloader(){const pl=document.getElementById('preloader');if(pl&&!pl.classList.contains('hide'))pl.classList.add('hide');}
+window.addEventListener('load',()=>{setTimeout(hidePreloader,800);});
+document.addEventListener('DOMContentLoaded',()=>{setTimeout(hidePreloader,2500);});
+setTimeout(hidePreloader,5000);
 
 /* ══ GUEST PARAM ══ */
-(function(){const p=new URLSearchParams(location.search).get('guest');if(p){const d=document.getElementById('guest-display');const g=document.getElementById('hero-greeting');if(d)d.textContent=decodeURIComponent(p);if(g)g.style.display='block';}})();
+(function(){const p=new URLSearchParams(location.search).get('guest');if(p){getElementById('guest-display');const g=document.getElementById('hero-greeting');if(d)d.textContent=decodeURIComponent(p);if(g)g.style.display='block';}})();
 </script>
 </body>
 </html>
