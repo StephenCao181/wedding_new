@@ -1202,7 +1202,7 @@ function enterSite(side){
   envelopeStep='open';
   const sideData={
     groom:{groomName:'Cao Gia Khoa',brideName:'Trần Thị Thu Huyền',groomDad:'Cao Văn Minh',groomMom:'Hoàng Thị Hà',brideDad:'Trần Văn Điệp',brideMom:'Bùi Thị Vân',ceremonyDate:'Thứ Bảy, 20/06/2026',ceremonyTime:'18:00 chiều',ceremonyAddr:'Cầu Rào 1, Hải Phòng',receptionDate:'Thứ Bảy, 20/06/2026',receptionVenue:'Tiệc cưới Phú Quý',receptionAddr:'Cầu Rào 1, Hải Phòng',mapsUrl:'https://maps.app.goo.gl/B4CTqNArn8i4qEVJ9',mapSrc:'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.5!2d106.698393!3d20.8299683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a7100559c4313%3A0xe900ce2f6ce3fe76!2zVGnhu4djIGPGsOG7m2kgUGjDuiBRdcO9!5e0!3m2!1svi!2svn!4v1700000000002!5m2!1svi!2svn'},
-    bride:{groomName:'Cao Gia Khoa',brideName:'Trần Thị Thu Huyền',groomDad:'Cao Văn Minh',groomMom:'Hoàng Thị Hà',brideDad:'Trần Văn Điệp',brideMom:'Bùi Thị Vân',ceremonyDate:'Thứ Bảy, 20/06/2026',ceremonyTime:'10:00 sáng',ceremonyAddr:'Xóm 12, Xã Giao Phong, Giao Thủy, Nam Định',receptionDate:'Thứ Bảy, 20/06/2026',receptionVenue:'Lễ Vu Quy — Nhà Gái',receptionAddr:'Xóm 12, Xã Giao Phong, Giao Thủy, Nam Định',mapsUrl:'https://maps.app.goo.gl/KqdFscQTHDpWZeDdA',mapSrc:'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3726.0!2d106.394566!3d20.256386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2m2!1d106.394566!2d20.256386!5e0!3m2!1svi!2svn!4v1700000000004!5m2!1svi!2svn'},
+    bride:{groomName:'Cao Gia Khoa',brideName:'Trần Thị Thu Huyền',groomDad:'Cao Văn Minh',groomMom:'Hoàng Thị Hà',brideDad:'Trần Văn Điệp',brideMom:'Bùi Thị Vân',ceremonyDate:'Thứ Bảy, 20/06/2026',ceremonyTime:'10:00 sáng',ceremonyAddr:'Xóm Hòa Bình, Xã Giao Bình, Ninh Bình',receptionDate:'Thứ Bảy, 20/06/2026',receptionVenue:'Lễ Vu Quy — Xóm Hòa Bình, Xã Giao Bình, Ninh Bình',receptionAddr:'Xóm Hòa Bình, Xã Giao Bình, Ninh Bình',mapsUrl:'https://maps.app.goo.gl/KqdFscQTHDpWZeDdA',mapSrc:'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3726.0!2d106.394566!3d20.256386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2m2!1d106.394566!2d20.256386!5e0!3m2!1svi!2svn!4v1700000000004!5m2!1svi!2svn'},
   };
   const d=sideData[side]||sideData.groom;
   const s=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
@@ -1216,6 +1216,13 @@ function enterSite(side){
   if(side==='bride'){
     s('data-hero-name1','Thu Huyền');s('data-hero-name2','Gia Khoa');
     // Đổi countdown date cards cho nhà gái
+    // Đổi sub labels: ceremony=Chiêu Đãi, reception=Nghi Lễ
+    const evSubs=document.querySelectorAll('.event-sub');
+    if(evSubs[0])evSubs[0].textContent='Chiêu Đãi Khách Mời';
+    if(evSubs[1])evSubs[1].textContent='Nghi Lễ Truyền Thống';
+    // Đổi ceremony host
+    const chEl=document.getElementById('data-ceremony-host');
+    if(chEl)chEl.textContent='Tư gia nhà gái';
     const cdsNotes=document.querySelectorAll('.cds-note');
     if(cdsNotes[0])cdsNotes[0].textContent='Bữa Cơm Thân Mật · 10:00';
     if(cdsNotes[1])cdsNotes[1].textContent='Lễ Vu Quy · 12:00';
