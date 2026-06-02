@@ -1215,6 +1215,10 @@ function enterSite(side){
   if(ch)ch.textContent=side==='bride'?'Tư gia nhà gái':'Tiệc cưới Phú Quý';
   if(side==='bride'){
     s('data-hero-name1','Thu Huyền');s('data-hero-name2','Gia Khoa');
+    // Đổi countdown date cards cho nhà gái
+    const cdsNotes=document.querySelectorAll('.cds-note');
+    if(cdsNotes[0])cdsNotes[0].textContent='Bữa Cơm Thân Mật · 10:00';
+    if(cdsNotes[1])cdsNotes[1].textContent='Lễ Vu Quy · 12:00';
     // Đổi thời gian tiệc + lễ cho nhà gái
     const rdEl=document.querySelector('[class="dv"]');
     document.querySelectorAll('.event-card').forEach((card,i)=>{
